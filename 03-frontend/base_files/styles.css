@@ -1,24 +1,29 @@
-/* 
-  This is a SAMPLE File to get you started. Follow the instructions on the project to complete the tasks. 
-  You'll probably need to override some of theese styles.
-*/
-
-* {
-    box-sizing: border-box;
+/* Styles Généraux */
+body {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #f4f4f4;
-    color: #333;
 }
 
+/* Styles de l'En-tête */
 header {
-    background-color: #333;
+    background: linear-gradient(135deg, #845EC2, #D65DB1, #FF6F91, #FF9671);
     color: #fff;
     padding: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    height: 40px;
 }
 
 nav a {
@@ -27,6 +32,274 @@ nav a {
     margin-left: 1rem;
 }
 
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Contenu Principal */
 main {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Section de Filtrage */
+#filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#filter label {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+#country-filter {
+    padding: 0.5em;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    max-width: 100%;
+}
+
+/* Section de Liste des Lieux */
+#places-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+    width: 100%; /* Assure que les cartes prennent toute la largeur disponible */
+}
+
+/* Styles des Cartes de Lieu */
+.place {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 10px;
+    padding: 1rem; /* Ajout de padding pour l'espace intérieur */
+    box-sizing: border-box; /* Assure que le padding ne dépasse pas la largeur définie */
+}
+
+.place:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.place h3 {
+    background: linear-gradient( #FF6F91, #FF9671); /* Couleur unie pour le fond */
+    color: #fff;
+    font-size: 1.25em;
+    margin: 0;
+    padding: 0.75em; /* Augmenter le padding pour plus d'espace */
+    text-align: center;
+    border-radius: 4px; /* Arrondir les coins */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajout d'ombre portée */
+}
+
+.place p {
+    margin: 0.5em 0; /* Réduction des marges pour plus de cohérence */
+    color: #333;
+}
+
+/* Styles des Cartes de Critiques */
+.review-card {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+/* Styles du Formulaire de Connexion */
+#login-form {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#login-form h2 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 28px;
+    font-weight: 700;
+    border-bottom: 2px solid #FF6F91;
+    padding-bottom: 10px;
+}
+
+#login-form label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: #555;
+}
+
+#login-form input[type="email"],
+#login-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#login-form input[type="email"]:focus,
+#login-form input[type="password"]:focus {
+    border-color: #FF6F91;
+    box-shadow: 0 0 5px rgba(255, 111, 145, 0.5);
+    outline: none;
+}
+
+#login-form button {
+    background-color: #FF6F91;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#login-form button:hover {
+    background-color: #FF9671;
+    transform: translateY(-2px);
+}
+
+#login-form button:active {
+    background-color: #FF6F91;
+    transform: translateY(0);
+}
+
+/* Styles du message d'erreur */
+#error-message {
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}
+
+/* Styles du Pied de Page */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Styles pour la Page de Détails du Lieu */
+#place-details {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    max-width: 800px;
+    width: 100%;
+}
+
+#place-details h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8em;
+    color: #333;
+}
+
+#place-details p {
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Styles pour la Section des Critiques */
+#reviews {
+    margin-top: 1rem;
+    max-width: 800px;
+    width: 100%;
+}
+
+#reviews .review {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+#reviews .review p {
+    margin-bottom: 0.5rem;
+}
+
+#reviews .review p strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+/* Styles pour la Section d'Ajout de Critique */
+#add-review {
+    margin-top: 1rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+#add-review h2 {
+    margin-bottom: 1rem;
+    font-size: 1.6em;
+    color: #333;
+}
+
+#add-review label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+#add-review textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 1rem;
+}
+
+#add-review button {
+    background: #FF6F91;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#add-review button:hover {
+    background: #FF9671;
 }

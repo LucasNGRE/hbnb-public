@@ -88,16 +88,34 @@ def add_review(place_id):
     if not user:
         return jsonify({"msg": "User not found"}), 404
 
-    review_text = request.json.get('review')
+    review_text = request.json.get('comment')
+    rating = request.json.get('rating')
+
     new_review = {
-        "user_name": user['name'],
-        "rating": request.json.get('rating'),
+        "user_name": user['name'],  # Assurez-vous que le nom est correctement utilisé
+        "rating": rating,
         "comment": review_text,
         "place_id": place_id
     }
 
     new_reviews.append(new_review)
+    print(f"New review added: {new_review}")  # Ajoutez un log pour vérifier
     return jsonify({"msg": "Review added"}), 201
+
+
+
+@app.route('/places/<place_id>/reviews', methods=['GET'])
+def get_reviews(place_id):
+    place = next((p for p in places if p['id'] == place_id), None)
+
+    if not place:
+        return jsonify({"msg": "Place not found"}), 404
+
+    # Filtrer les critiques pour le lieu spécifié
+    place_reviews = [r for r in new_reviews if r['place_id'] == place_id]
+    response = place['reviews'] + place_reviews
+    return jsonify(response)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

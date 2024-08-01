@@ -9,7 +9,12 @@
 <body>
     <header>
         <nav>
+            <img src="logo.png" alt="App logo" class="logo">
+            <a href="index.html" id="home-link">Home</a>
             <a href="login.html" id="login-link">Login</a>
+            <!-- Ajoutez ce code dans votre header ou dans un autre endroit approprié -->
+            <a href="#" id="logout-link" style="display: none;">Logout</a>
+
         </nav>
     </header>
     <main>
@@ -22,7 +27,11 @@
         <section id="places-list">
             <!-- List of places will be populated dynamically -->
         </section>
+        <span id="user-name" style="display:none;"></span> <!-- Ajout du span pour le nom de l'utilisateur -->
     </main>
+    <footer>
+        <p>&copy; 2024 HBnB Evolution. All rights reserved.</p>
+    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>
