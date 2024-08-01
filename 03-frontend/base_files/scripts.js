@@ -14,7 +14,6 @@ function checkAuthentication() {
     const logoutLink = document.getElementById('logout-link');
     const userName = document.getElementById('user-name');
 
-    // Vérifiez que les éléments existent avant d'essayer de les manipuler
     if (loginLink) {
         loginLink.style.display = token ? 'none' : 'block';
     }
@@ -23,7 +22,6 @@ function checkAuthentication() {
     }
 
     if (token && document.getElementById('place-details')) {
-        // Fetch place details if on the place details page
         const placeId = getPlaceIdFromURL();
         if (placeId) {
             fetchPlaceDetails(token, placeId);
@@ -145,8 +143,6 @@ async function fetchPlaceDetails(token, placeId) {
 
         const place = await response.json();
         displayPlaceDetails(place);
-
-        // Fetch reviews for the place
         await fetchReviews(token, placeId);
     } catch (error) {
         console.error('Error fetching place details:', error);
@@ -157,10 +153,9 @@ async function fetchPlaceDetails(token, placeId) {
 function displayPlaceDetails(place) {
     const placeDetailsSection = document.getElementById('place-details');
 
-    // Vérifiez si place.images est un tableau avant d'utiliser map()
     const imagesHTML = Array.isArray(place.images) 
         ? place.images.map(img => `<img src="${img}" alt="${place.name}" class="place-image">`).join('')
-        : '<p>No images available.</p>';  // Message de secours si aucune image
+        : '<p>No images available.</p>';
 
     placeDetailsSection.innerHTML = `
         <h1>${place.description}</h1>
@@ -212,7 +207,7 @@ function displayReviews(reviews) {
 // Fonction pour gérer l'envoi du formulaire d'avis
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
-    const logoutButton = document.getElementById('logout-link'); // Assure-toi que ce bouton existe dans tes pages
+    const logoutButton = document.getElementById('logout-link');
     const reviewForm = document.getElementById('review-form');
 
     if (loginForm) {
@@ -227,12 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    // Stocker le token dans un cookie
                     document.cookie = `token=${data.access_token}; path=/`;
-                    // Rediriger vers la page d'accueil
                     window.location.href = 'index.html';
                 } else {
-                    // Afficher un message d'erreur en cas d'échec de la connexion
                     const errorMessage = document.getElementById('error-message');
                     if (errorMessage) {
                         errorMessage.textContent = 'Login failed: ' + response.statusText;
@@ -256,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const reviewText = document.getElementById('review-text').value;
+            const rating = document.getElementById('rating').value; // Lire la valeur du rating
             const token = getCookie('token');
             const placeId = getPlaceIdFromURL();
 
@@ -266,12 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({ comment: reviewText, rating: 5 }) // Ajoute le rating ici si nécessaire
+                    body: JSON.stringify({ comment: reviewText, rating: parseInt(rating, 10) }) // Inclure le rating dans le corps de la demande
                 });
 
                 if (response.ok) {
                     alert('Review added successfully!');
                     document.getElementById('review-text').value = '';  // Clear the form
+                    document.getElementById('rating').value = '';       // Clear the rating
                     await fetchReviews(token, placeId);  // Rafraîchir les avis
                 } else {
                     console.error('Failed to add review:', response.statusText);
